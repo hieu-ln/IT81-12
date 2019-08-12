@@ -128,17 +128,6 @@ void sapxepE()
 				swap(E2[i], E2[j]);
 			}
 }
-//void SapXepE()
-//{
-//	for (int i = 0; i < nE - 1;i++)
-//		for (int j = i + 1;j < nE;j++)
-//			if (wE[i] > wE[j])
-//			{
-//				swap(wE[i], wE[j]);
-//				swap(E1[i], E1[j]);
-//				swap(E1[i], E1[j]);
-//			}
-//}
 //Kruskla
 void Kruskla()
 {

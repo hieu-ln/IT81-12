@@ -18,7 +18,7 @@ void initGraph()
 void inputGraphFromText()
 {
 	string line;
-	ifstream myfile("matrantrongso1.txt");
+	ifstream myfile("do_thi_1.txt");
 	if(myfile.is_open())
 	{
 		myfile >> n;
@@ -75,7 +75,7 @@ void swap(int &x, int &y)
 	y=c;
 
 }
-
+//fkdf
 int tontai(int d, int D[], int nD)
 {
 	for(int i= 0; i< n; i++)
@@ -102,7 +102,7 @@ void xoacanh(int u, int v)
 			break;
 		}
 }
-
+///gfgfdgfdg
 void taoE()
 {
 	for(int i = 0; i< n; i++)
@@ -128,17 +128,47 @@ void sapxepE()
 				swap(E2[i], E2[j]);
 			}
 }
-//void SapXepE()
-//{
-//	for (int i = 0; i < nE - 1;i++)
-//		for (int j = i + 1;j < nE;j++)
-//			if (wE[i] > wE[j])
-//			{
-//				swap(wE[i], wE[j]);
-//				swap(E1[i], E1[j]);
-//				swap(E1[i], E1[j]);
-//			}
-//}
+//Prim
+void prim(int s)
+{
+	int u =s , min ,i,d1 ,d2;
+	while(nT < n-1)
+	{
+		for(int v =0; v<n; v++)
+			if(a[u][v] != 0)
+				if(tontai(v,T2,nT) == 0)
+				{
+					E1[nE] = u;
+					E2[nE] = v;
+					wE[nE] = a[u][v];
+					nE++;
+				}
+				for(int i= 0; i< nE; i++)
+					if(tontai(E2[i],T2,nT) ==0)
+					{
+						min = wE[i];
+						d1= E1[i];
+						d2 = E2[i];
+						break;
+					}
+					for(int i= 0; i< nE; i++)
+						if(tontai(E2[i],T2,nT) ==0)
+							if(min >wE[i])
+							{
+								min = wE[i];
+								d1= E1[i];
+								d2 = E2[i];
+							}
+							T1[nT] = d1;
+							T2[nT] = d2;
+							wT[nT] = a[d1][d2];
+							a[d1][d2] = 0;
+							a[d2][d1] = 0;
+							nT++;
+							xoacanh(d1,d2);
+							u=d2;
+	}
+}
 //Kruskla
 void Kruskla()
 {
@@ -176,8 +206,10 @@ int main()
 	cout << "2.Nhap ma tran ke tu file" <<endl;
 	cout << "3.Nhap ma tran ke " <<endl;
 	cout << "4.Xuat ma tran ke "<<endl;
-	cout << "5.Tim cay khung toi thieu" <<endl;
-	cout << "6.Thoat "<<endl;
+	cout << "5.Tim cay khung toi thieu bang prim" <<endl;
+	cout << "6.Tim cay khung toi thieu bang kruskal" <<endl;
+	cout << "7.Tim cay khung toi thieu bang kruskal cai tien" <<endl;
+	cout << "8.Thoat "<<endl;
 	do{
 		cout << "Vui long chon so de thuc thi chuong trinh : "<<endl;
 		cin >> choice;
@@ -199,15 +231,32 @@ int main()
 			outputGraph();
 			break;
 		case 5:
+			cout <<"Tim cay khung toi thieu bang prim "<<endl;
+			cout << "Nhap dinh xuat phat ";
+			cin >> x;
+			prim(x);
+			cout << "Cay khung toi thieu" <<endl;
+			output(true);
+			break;
+		case 6:
+			cout <<"Tim cay khung toi thieu bang Kruskal "<<endl;
 			taoE();
 			Kruskla();
 			cout << "Cay khung toi thieu " <<endl;
 			output(true);
 			break;
-		case 6:
+		case 7:
+			cout <<"Tim cay khung toi thieu bang Kruskal cai tien "<<endl;
+			taoE();
+			sapxepE();
+			Kruskla();
+			cout << "Cay khung toi thieu " <<endl;
+			output(true);
+			break;
+		case 8:
 			cout << "Goodbye !!! "<<endl;
 			break;
 		}
-	}while(choice != 6);
+	}while(choice != 8);
 	return 0;
 }
